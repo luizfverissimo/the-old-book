@@ -1,10 +1,18 @@
-import styled from 'styled-components'
+import CharTitle from '../components/CharTitle';
+import Navbar from '../components/Navbar';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import * as S from '../styles/Home';
 
 export default function Home() {
-  return <Title>My page</Title>
+  return (
+    <S.Content>
+      <Navbar />
+      <CharTitle
+        name='Rydel Theharice'
+        charClass='Sorcerer'
+        race='Elf'
+        level='02'
+      />
+    </S.Content>
+  );
 }
