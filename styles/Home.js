@@ -5,3 +5,13 @@ export const Content = styled.main`
   height: auto;
   max-width: 1200px;
 `
+
+export const SpellCardGridWrapper = styled.section`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem; */
+`

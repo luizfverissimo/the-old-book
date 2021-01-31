@@ -6,7 +6,7 @@ export const CharTitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   line-height: 3.5rem;
-  margin-top: 6rem
+  margin: 6rem 0;
 `
 
 export const CharName = styled.h2`
