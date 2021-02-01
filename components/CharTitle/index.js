@@ -4,7 +4,10 @@ import * as S from './styled';
 function CharTitle({ name, charClass, race, level }) {
   return (
     <S.CharTitleWrapper>
-      <S.CharName>{name}</S.CharName>
+      <S.CharNameWrapper>
+        <S.CharName>{name}</S.CharName>
+        <S.EditIcon size={26} />
+      </S.CharNameWrapper>
       <S.CharInfo>
         {race} {charClass} - Level {level}
       </S.CharInfo>
