@@ -11,6 +11,7 @@ export const SpellCardGridWrapper = styled.section`
   height: auto;
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 3rem;
   /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem; */

@@ -8,12 +8,14 @@ export const SpellCardWrapper = styled.div`
   padding: 1.5rem;
   background-color: var(--purple);
   border-radius: 1.5rem;
-  transition: all 1s ease;
+  transition: all .2s ease;
   margin: 1rem 2rem 1rem 0;
 
-  /* &:hover {
-    background-color: var(--light-purple);
-  } */
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.25));
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
 
   &:last-child {
     margin-right: 0;
