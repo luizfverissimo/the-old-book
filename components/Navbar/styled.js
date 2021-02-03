@@ -9,6 +9,7 @@ export const NavbarWrapper = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 0;
+  position: relative;
 `;
 
 export const LogoWrapper = styled.div`
@@ -46,6 +47,7 @@ export const IconsWrapper = styled.div`
 export const CharIcon = styled(User)`
   color: ${(props) => (props.active ? 'var(--yellow)' : 'var(--light-purple)')};
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     color: var(--white);
@@ -56,6 +58,7 @@ export const GearIcon = styled(GearFill)`
   color: ${(props) => (props.active ? 'var(--yellow)' : 'var(--light-purple)')};
   transition: all 0.2s ease;
   margin-left: 1rem;
+  cursor: pointer;
 
   &:hover {
     color: var(--white);
@@ -86,5 +89,73 @@ export const SearchInput = styled.input`
   &:focus {
     color: var(--yellow);
     border: 1px solid var(--yellow);
+  }
+`
+
+export const CharWrapper = styled.ul`
+  position: absolute;
+  top: 6rem;
+  right: 3rem;
+  width: 20rem;
+  height: auto;
+  background-color: var(--black);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.3rem;
+  color: var(--white);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+export const CharItem = styled.li`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0.5rem 0;
+  cursor: pointer;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`
+export const CharItemName = styled.p`
+  margin: 0;
+  transition: all 0.2s ease;
+
+  ${CharItem}:hover & {
+    color: var(--yellow);
+  }
+`
+export const CharItemClass = styled.p`
+  font-size: 1rem;
+  margin: 0;
+  transition: all 0.2s ease;
+
+  ${CharItem}:hover & {
+    color: var(--light-yellow);
+  }
+`
+
+export const CharActionWrapper = styled.li`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+
+  a {
+    color: var(--light-yellow);
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--yellow);
+    }
   }
 `

@@ -7,6 +7,27 @@ import SpellCard from '../components/SpellCard';
 import * as S from '../styles/Home';
 
 export default function Home() {
+  const chars = [
+    {
+      name: "Rydel Theharcie",
+      charClass: "Sorcerer",
+      race:'Elf',
+      level:'02'
+    },
+    {
+      name: "Rydel Theharcie",
+      charClass: "Sorcerer",
+      race:'Elf',
+      level:'02'
+    },
+    {
+      name: "Rydel Theharcie",
+      charClass: "Sorcerer",
+      race:'Elf',
+      level:'02'
+    },
+  ]
+
   return (
     <>
       <Head>
@@ -14,7 +35,7 @@ export default function Home() {
       </Head>
 
       <S.Content>
-        <Navbar />
+        <Navbar chars={chars} />
         <CharTitle
           name='Rydel Theharice'
           charClass='Sorcerer'
