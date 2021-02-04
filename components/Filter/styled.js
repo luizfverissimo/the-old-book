@@ -12,6 +12,7 @@ export const FilterWrapper = styled.div`
   padding-right: 3rem;
   margin-bottom: 1rem;
   position: relative;
+  cursor: pointer;
 `;
 export const FilterIconWrapper = styled.div`
   width: 63px;

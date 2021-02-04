@@ -4,7 +4,9 @@ import * as S from './styled';
 
 function Filter() {
   const [isActive, setIsActive] = useState(false);
+  const [filterSelected, setFilterSelected] = useState('All');
   const filters = [
+    'All',
     'Cantrip',
     '1st-level',
     '2nd-level',
@@ -19,7 +21,7 @@ function Filter() {
 
   return (
     <S.FilterWrapper>
-      <p>All</p>
+      <p>{filterSelected}</p>
       <S.FilterIconWrapper
         active={isActive}
         onClick={() => setIsActive(!isActive)}
@@ -29,8 +31,16 @@ function Filter() {
 
       {isActive && (
         <S.FilterItemsWrapper>
-          {filters.map((filter) => (
-            <li>{filter}</li>
+          {filters.map((filter, index) => (
+            <li
+              key={index}
+              onClick={() => {
+                setFilterSelected(filter);
+                setIsActive(false);
+              }}
+            >
+              {filter}
+            </li>
           ))}
         </S.FilterItemsWrapper>
       )}

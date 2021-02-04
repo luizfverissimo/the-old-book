@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as S from './styled';
 
 function Navbar({ chars }) {
-  const [isOpenChar, setIsOpenChar] = useState(true);
+  const [isOpenChar, setIsOpenChar] = useState(false);
 
   return (
     <S.NavbarWrapper>
@@ -21,8 +21,8 @@ function Navbar({ chars }) {
           />
           {isOpenChar && (
             <S.CharWrapper>
-              {chars.map((char) => (
-                <S.CharItem>
+              {chars.map((char, index) => (
+                <S.CharItem key={index}>
                   <S.CharItemName>{char.name}</S.CharItemName>
                   <S.CharItemClass>
                     {char.race} {char.charClass} - Level {char.level}
