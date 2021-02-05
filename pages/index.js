@@ -1,46 +1,54 @@
+import React, { useState } from 'react';
 import Head from 'next/head';
 import CharTitle from '../components/CharTitle';
 import Filter from '../components/Filter';
+import ModalCreateChar from '../components/ModalCreateChar';
 import Navbar from '../components/Navbar';
 import SpellCard from '../components/SpellCard';
 
 import * as S from '../styles/Home';
 
 export default function Home() {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const chars = [
     {
-      name: "Rydel Theharcie",
-      charClass: "Sorcerer",
-      race:'Elf',
-      level:'02'
+      name: 'Rydel Theharcie',
+      charClass: 'Sorcerer',
+      race: 'Elf',
+      level: '02'
     },
     {
-      name: "Rydel Theharcie",
-      charClass: "Sorcerer",
-      race:'Elf',
-      level:'02'
+      name: 'Rydel Theharcie',
+      charClass: 'Sorcerer',
+      race: 'Elf',
+      level: '02'
     },
     {
-      name: "Rydel Theharcie",
-      charClass: "Sorcerer",
-      race:'Elf',
-      level:'02'
-    },
-  ]
+      name: 'Rydel Theharcie',
+      charClass: 'Sorcerer',
+      race: 'Elf',
+      level: '02'
+    }
+  ];
 
   return (
     <>
       <Head>
         <title>The Old Book | SpellBook Manager</title>
       </Head>
+      {isOpenModal && (
+        <ModalCreateChar closeModal={() => setIsOpenModal(false)}/>
+      )}
 
       <S.Content>
-        <Navbar chars={chars} />
+        <Navbar chars={chars} openCharModal={() => setIsOpenModal(true)} />
         <CharTitle
           name='Rydel Theharice'
           charClass='Sorcerer'
           race='Elf'
           level='02'
+          openCharModal={() => setIsOpenModal(true)}
         />
         <Filter />
         <S.SpellCardGridWrapper>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styled';
 
-function Navbar({ chars }) {
+function Navbar({ chars, openCharModal }) {
   const [isOpenChar, setIsOpenChar] = useState(false);
 
   return (
@@ -30,7 +30,7 @@ function Navbar({ chars }) {
                 </S.CharItem>
               ))}
               <S.CharActionWrapper>
-                <a>+ Add New Character</a>
+                <a onClick={openCharModal}>+ Add New Character</a>
               </S.CharActionWrapper>
             </S.CharWrapper>
           )}
