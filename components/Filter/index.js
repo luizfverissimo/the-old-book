@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import useComponentVisible from '../../hooks/useComponentVisible';
 
 import * as S from './styled';
 
 function Filter() {
-  const [isActive, setIsActive] = useState(false);
   const [filterSelected, setFilterSelected] = useState('All');
   const filters = [
     'All',
@@ -19,24 +19,29 @@ function Filter() {
     '9th-level'
   ];
 
+  const {
+    ref,
+    isComponentVisible,
+    setIsComponentVisible
+  } = useComponentVisible(false);
+
   return (
     <S.FilterWrapper>
       <p>{filterSelected}</p>
       <S.FilterIconWrapper
-        active={isActive}
-        onClick={() => setIsActive(!isActive)}
+        active={isComponentVisible}
+        onClick={() => setIsComponentVisible(!isComponentVisible)}
       >
-        <S.FilterIcon size={32} active={isActive} />
+        <S.FilterIcon size={32} active={isComponentVisible} />
       </S.FilterIconWrapper>
 
-      {isActive && (
-        <S.FilterItemsWrapper>
+      {isComponentVisible && (
+        <S.FilterItemsWrapper ref={ref}>
           {filters.map((filter, index) => (
             <li
               key={index}
               onClick={() => {
                 setFilterSelected(filter);
-                setIsActive(false);
               }}
             >
               {filter}

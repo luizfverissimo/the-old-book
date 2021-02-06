@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import useComponentVisible from '../../hooks/useComponentVisible';
 import * as S from './styled';
 
 function Navbar({ chars, openCharModal }) {
   const [isOpenChar, setIsOpenChar] = useState(false);
+  const [isOpenSearchResults, setIsOpenSearchResults] = useState(false);
+
+  const {
+    ref,
+    isComponentVisible,
+    setIsComponentVisible
+  } = useComponentVisible(false);
 
   return (
     <S.NavbarWrapper>
@@ -12,15 +20,29 @@ function Navbar({ chars, openCharModal }) {
       </S.LogoWrapper>
 
       <S.LeftElementsWrapper>
-        <S.SearchInput placeholder='Search Spells' />
+        <S.SearchInput
+          placeholder='Search Spells'
+          onFocus={() => {
+            setIsOpenSearchResults(true);
+            setIsComponentVisible(false)
+          }}
+          onBlur={() => setIsOpenSearchResults(false)}
+        />
+        {isOpenSearchResults && (
+          <S.SearchResultWrapper>
+            <li>Fire Bolt</li>
+            <li>Fire Ball</li>
+          </S.SearchResultWrapper>
+        )}
+
         <S.IconsWrapper>
           <S.CharIcon
-            active={isOpenChar}
+            active={isComponentVisible}
             size={28}
-            onClick={() => setIsOpenChar(!isOpenChar)}
+            onClick={() => setIsComponentVisible(!isComponentVisible)}
           />
-          {isOpenChar && (
-            <S.CharWrapper>
+          {isComponentVisible && (
+            <S.CharWrapper ref={ref} >
               {chars.map((char, index) => (
                 <S.CharItem key={index}>
                   <S.CharItemName>{char.name}</S.CharItemName>

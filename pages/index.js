@@ -10,7 +10,14 @@ import * as S from '../styles/Home';
 
 export default function Home() {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isEditChar, setIsEditChar] = useState(false);
 
+  const charInfos = {
+    name: 'Rydel Theharcie',
+    charClass: 'Sorcerer',
+    race: 'Elf',
+    level: '02'
+  };
   const chars = [
     {
       name: 'Rydel Theharcie',
@@ -38,17 +45,30 @@ export default function Home() {
         <title>The Old Book | SpellBook Manager</title>
       </Head>
       {isOpenModal && (
-        <ModalCreateChar closeModal={() => setIsOpenModal(false)}/>
+        <ModalCreateChar
+          charInfos={charInfos}
+          isEditChar={isEditChar}
+          closeModal={() => setIsOpenModal(false)}
+        />
       )}
 
       <S.Content>
-        <Navbar chars={chars} openCharModal={() => setIsOpenModal(true)} />
+        <Navbar
+          chars={chars}
+          openCharModal={() => {
+            setIsOpenModal(true);
+            setIsEditChar(false);
+          }}
+        />
         <CharTitle
           name='Rydel Theharice'
           charClass='Sorcerer'
           race='Elf'
           level='02'
-          openCharModal={() => setIsOpenModal(true)}
+          openCharModal={() => {
+            setIsOpenModal(true);
+            setIsEditChar(true);
+          }}
         />
         <Filter />
         <S.SpellCardGridWrapper>

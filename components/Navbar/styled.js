@@ -92,6 +92,32 @@ export const SearchInput = styled.input`
   }
 `
 
+export const SearchResultWrapper = styled.ul`
+  width: 20rem;
+  padding: 1.5rem;
+  background-color: var(--black);
+  position: absolute;
+  top: 6rem;
+  right: 8.5rem;
+  border-radius: 1rem;
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.3rem;
+  color: var(--white);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  li {
+    cursor: pointer;
+    margin: 0.5rem 0;
+
+    &:hover {
+      color: var(--yellow);
+    }
+  }
+`
+
 export const CharWrapper = styled.ul`
   position: absolute;
   top: 6rem;
@@ -159,3 +185,4 @@ export const CharActionWrapper = styled.li`
     }
   }
 `
+

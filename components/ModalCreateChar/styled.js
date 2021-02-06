@@ -42,7 +42,7 @@ export const ModalCardTitle = styled.h2`
 `;
 
 export const ModalCardFormLabel = styled.label`
-  ${ModalCardFormInput}:focus & {
+  &:focus {
     color: var(--yellow);
   }
 `;
