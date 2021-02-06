@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import uniqid from 'uniqid'
 
 import * as S from './styled';
 
@@ -16,6 +17,60 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
       setLevel(charInfos.level);
     }
   }, []);
+
+  const handleCharCreation = () => {
+    if (
+      name.length === 0 ||
+      race.length === 0 ||
+      charClass.length === 0 ||
+      level.length === 0
+    ) {
+      alert('All fields is required.')
+      return
+    }
+
+    const charObj = {
+      id: uniqid(),
+      isActive: false,
+      charInfos: {
+        name,
+        race,
+        charClass,
+        level
+      },
+      spells: []
+    }
+
+    const charsFromLocalStorage = localStorage.getItem('chars')
+    if (!charsFromLocalStorage) {
+      const charsToLocalStorage = {
+        chars: [
+          charObj
+        ]
+      }
+      localStorage.setItem('chars', JSON.stringify(charsToLocalStorage))
+      alert('Character successfully created.')
+      return
+    }
+
+    const charsParsed = JSON.parse(charsFromLocalStorage)
+
+    if(!isEditChar) {
+      console.log(charsParsed)
+      charsParsed.chars.push(charObj)
+      localStorage.setItem('chars', JSON.stringify(charsParsed))
+      alert('Character successfully created.')
+      return
+    }
+
+    if(isEditChar) {
+      const charsFiltered = charsParsed.chars.filter(char => char.id !== charInfos.id )
+      charsFiltered.chars.push(charObj)
+      localStorage.setItem('chars', JSON.stringify(charsFiltered))
+      alert('Character successfully created.')
+      return
+    }
+  };
 
   return (
     <S.ModalBackground>
@@ -44,7 +99,7 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
         <S.ModalCardFormInput
           type='text'
           value={charClass}
-          onChange={(e) => setCharClass(e.target.valeu)}
+          onChange={(e) => setCharClass(e.target.value)}
         />
 
         <S.ModalCardFormLabel>Level</S.ModalCardFormLabel>
@@ -57,7 +112,7 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
 
         <S.ModalCardInteractionWrapper>
           {isEditChar && <a>Delete</a>}
-          <a>Create</a>
+          <a onClick={handleCharCreation}>Create</a>
         </S.ModalCardInteractionWrapper>
       </S.ModalCard>
     </S.ModalBackground>

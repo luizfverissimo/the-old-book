@@ -24,7 +24,7 @@ function Navbar({ chars, openCharModal }) {
           placeholder='Search Spells'
           onFocus={() => {
             setIsOpenSearchResults(true);
-            setIsComponentVisible(false)
+            setIsComponentVisible(false);
           }}
           onBlur={() => setIsOpenSearchResults(false)}
         />
@@ -42,15 +42,25 @@ function Navbar({ chars, openCharModal }) {
             onClick={() => setIsComponentVisible(!isComponentVisible)}
           />
           {isComponentVisible && (
-            <S.CharWrapper ref={ref} >
-              {chars.map((char, index) => (
-                <S.CharItem key={index}>
-                  <S.CharItemName>{char.name}</S.CharItemName>
-                  <S.CharItemClass>
-                    {char.race} {char.charClass} - Level {char.level}
-                  </S.CharItemClass>
+            <S.CharWrapper ref={ref}>
+              {Object.keys(chars).length === 0 ? (
+                <S.CharItem>
+                  <S.CharItemName>
+                    No Characters found, create a new character.
+                  </S.CharItemName>
                 </S.CharItem>
-              ))}
+              ) : (
+                chars.map(({ charInfos }, index) => (
+                  <S.CharItem key={index}>
+                    <S.CharItemName>{charInfos.name}</S.CharItemName>
+                    <S.CharItemClass>
+                      {charInfos.race} {charInfos.charClass} - Level{' '}
+                      {charInfos.level}
+                    </S.CharItemClass>
+                  </S.CharItem>
+                ))
+              )}
+
               <S.CharActionWrapper>
                 <a onClick={openCharModal}>+ Add New Character</a>
               </S.CharActionWrapper>

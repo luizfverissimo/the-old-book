@@ -1,23 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import useComponentVisible from '../../hooks/useComponentVisible';
+import filtersJSONData from '../../data/filters.json';
 
 import * as S from './styled';
 
 function Filter() {
   const [filterSelected, setFilterSelected] = useState('All');
-  const filters = [
-    'All',
-    'Cantrip',
-    '1st-level',
-    '2nd-level',
-    '3rd-level',
-    '4th-level',
-    '5th-level',
-    '6th-level',
-    '7th-level',
-    '8th-level',
-    '9th-level'
-  ];
+
+  const { filters } = filtersJSONData;
 
   const {
     ref,

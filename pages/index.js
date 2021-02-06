@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import CharTitle from '../components/CharTitle';
 import Filter from '../components/Filter';
@@ -11,6 +11,24 @@ import * as S from '../styles/Home';
 export default function Home() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isEditChar, setIsEditChar] = useState(false);
+  const [chars, setChars] = useState({})
+  const [charActive, setCharActive] = useState({})
+  const [noCharsFind, setNoCharsFind] = useState(true)
+
+  useEffect(() => {
+    const charsFromLocalStorage = localStorage.getItem('chars')
+    if (!charsFromLocalStorage) {
+      return
+    }
+    const charsParsed = JSON.parse(charsFromLocalStorage)
+    const charActiveFiltered = charsParsed.chars.filter(char => char.isActive)
+
+    console.log(charsParsed)
+
+    setChars(charsParsed.chars)
+    setCharActive(charActiveFiltered)
+    setNoCharsFind(false)
+  }, [])
 
   const charInfos = {
     name: 'Rydel Theharcie',
@@ -18,7 +36,7 @@ export default function Home() {
     race: 'Elf',
     level: '02'
   };
-  const chars = [
+  const charsEx = [
     {
       name: 'Rydel Theharcie',
       charClass: 'Sorcerer',
