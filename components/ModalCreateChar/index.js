@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import uniqid from 'uniqid'
+import React, { useState, useEffect, useContext } from 'react';
+import uniqid from 'uniqid';
 
 import * as S from './styled';
+
+import { CharContext } from '../../context/AppContext';
+
 
 function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
   const [name, setName] = useState('');
   const [race, setRace] = useState('');
   const [charClass, setCharClass] = useState('');
   const [level, setLevel] = useState('');
+  const [id, setId] = useState('');
+  
+  const { chars, createNewChar, editChar } = useContext(CharContext);
 
   useEffect(() => {
     if (isEditChar) {
@@ -15,6 +21,7 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
       setRace(charInfos.race);
       setCharClass(charInfos.charClass);
       setLevel(charInfos.level);
+      setId(charInfos.id);
     }
   }, []);
 
@@ -25,12 +32,12 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
       charClass.length === 0 ||
       level.length === 0
     ) {
-      alert('All fields is required.')
-      return
+      alert('All fields is required.');
+      return;
     }
 
     const charObj = {
-      id: uniqid(),
+      id: isEditChar ? id : uniqid(),
       isActive: false,
       charInfos: {
         name,
@@ -39,36 +46,14 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
         level
       },
       spells: []
+    };
+
+    if (!isEditChar) {
+      createNewChar(charObj);
     }
 
-    const charsFromLocalStorage = localStorage.getItem('chars')
-    if (!charsFromLocalStorage) {
-      const charsToLocalStorage = {
-        chars: [
-          charObj
-        ]
-      }
-      localStorage.setItem('chars', JSON.stringify(charsToLocalStorage))
-      alert('Character successfully created.')
-      return
-    }
-
-    const charsParsed = JSON.parse(charsFromLocalStorage)
-
-    if(!isEditChar) {
-      console.log(charsParsed)
-      charsParsed.chars.push(charObj)
-      localStorage.setItem('chars', JSON.stringify(charsParsed))
-      alert('Character successfully created.')
-      return
-    }
-
-    if(isEditChar) {
-      const charsFiltered = charsParsed.chars.filter(char => char.id !== charInfos.id )
-      charsFiltered.chars.push(charObj)
-      localStorage.setItem('chars', JSON.stringify(charsFiltered))
-      alert('Character successfully created.')
-      return
+    if (isEditChar) {
+      editChar(charObj, id);
     }
   };
 

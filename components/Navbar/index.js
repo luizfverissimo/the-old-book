@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import useComponentVisible from '../../hooks/useComponentVisible';
 import * as S from './styled';
 
-function Navbar({ chars, openCharModal }) {
+import { CharContext } from '../../context/AppContext';
+
+function Navbar({ openCharModal }) {
   const [isOpenChar, setIsOpenChar] = useState(false);
   const [isOpenSearchResults, setIsOpenSearchResults] = useState(false);
+
+  const { chars, setActiveChar } = useContext(CharContext);
 
   const {
     ref,
@@ -45,13 +49,13 @@ function Navbar({ chars, openCharModal }) {
             <S.CharWrapper ref={ref}>
               {Object.keys(chars).length === 0 ? (
                 <S.CharItem>
-                  <S.CharItemName>
+                  <S.CharItemName onClick={openCharModal}>
                     No Characters found, create a new character.
                   </S.CharItemName>
                 </S.CharItem>
               ) : (
-                chars.map(({ charInfos }, index) => (
-                  <S.CharItem key={index}>
+                chars.map(({ charInfos, id }, index) => (
+                  <S.CharItem key={index} onClick={() => setActiveChar(id)}>
                     <S.CharItemName>{charInfos.name}</S.CharItemName>
                     <S.CharItemClass>
                       {charInfos.race} {charInfos.charClass} - Level{' '}
