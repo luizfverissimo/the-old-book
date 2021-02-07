@@ -43,7 +43,7 @@ export default function Home() {
           }}
         />
         {noCharsFound ? (
-          <h1>No Characters found, create a new Character.</h1>
+          <S.NoCharMessage>No Characters found, create a new Character.</S.NoCharMessage>
         ) : (
           <CharTitle
             name={charActive.charInfos.name}
@@ -59,9 +59,7 @@ export default function Home() {
 
         <Filter />
 
-        {noCharsFound ? (
-          <p>No Characters found, create a new Character.</p>
-        ) : (
+        {!noCharsFound && (
           <S.SpellCardGridWrapper>
             <SpellCard
               name='Acid Arrow'
