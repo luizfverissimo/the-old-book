@@ -30,6 +30,7 @@ export default function Home() {
       {isOpenModal && (
         <ModalCreateChar
           charInfos={charActive.charInfos}
+          charId={charActive.id}
           isEditChar={isEditChar}
           closeModal={() => setIsOpenModal(false)}
         />

@@ -4,16 +4,18 @@ import uniqid from 'uniqid';
 import * as S from './styled';
 
 import { CharContext } from '../../context/AppContext';
+import { FormatColorReset } from 'styled-icons/material-rounded';
 
-
-function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
+function ModalCreateChar({ closeModal, charInfos, charId, isEditChar }) {
   const [name, setName] = useState('');
   const [race, setRace] = useState('');
   const [charClass, setCharClass] = useState('');
   const [level, setLevel] = useState('');
   const [id, setId] = useState('');
-  
-  const { chars, createNewChar, editChar } = useContext(CharContext);
+
+  const { chars, createNewChar, editChar, deleteChar } = useContext(
+    CharContext
+  );
 
   useEffect(() => {
     if (isEditChar) {
@@ -21,7 +23,7 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
       setRace(charInfos.race);
       setCharClass(charInfos.charClass);
       setLevel(charInfos.level);
-      setId(charInfos.id);
+      setId(charId);
     }
   }, []);
 
@@ -55,6 +57,12 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
     if (isEditChar) {
       editChar(charObj, id);
     }
+    closeModal();
+  };
+
+  const handleDeleteChar = () => {
+    const res = deleteChar(id);
+    if (res) closeModal();
   };
 
   return (
@@ -94,10 +102,9 @@ function ModalCreateChar({ closeModal, charInfos, isEditChar }) {
           value={level}
           onChange={(e) => setLevel(e.target.value)}
         />
-
         <S.ModalCardInteractionWrapper>
-          {isEditChar && <a>Delete</a>}
-          <a onClick={handleCharCreation}>Create</a>
+          {isEditChar && <a onClick={() => handleDeleteChar()}>Delete</a>}
+          <a onClick={handleCharCreation}>{isEditChar ? 'Save' : 'Create'}</a>
         </S.ModalCardInteractionWrapper>
       </S.ModalCard>
     </S.ModalBackground>

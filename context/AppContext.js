@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { Trash2Outline } from 'styled-icons/evaicons-outline';
+import { Letsencrypt } from 'styled-icons/simple-icons';
 
 const CharContext = createContext();
 
@@ -18,11 +20,11 @@ const AppContext = ({ children }) => {
       (char) => char.isActive
     );
 
-    console.log("Chars:", charsParsed.chars)
-    console.log("Char Active:", charActiveFiltered[0])
+    console.log('Chars:', charsParsed.chars);
+    console.log('Char Active:', charActiveFiltered[0]);
 
     setChars(charsParsed.chars);
-    setCharActive(charActiveFiltered[0]);
+    setActiveChar(charActiveFiltered[0].id)
     setNoCharsFound(false);
   }, []);
 
@@ -52,15 +54,49 @@ const AppContext = ({ children }) => {
     const charsFromLocalStorage = localStorage.getItem('chars');
     const charsParsed = JSON.parse(charsFromLocalStorage);
 
-    const charsFiltered = charsParsed.chars.filter(
+    let charsFiltered = charsParsed.chars.filter(
       (char) => char.id !== charId
     );
+
     charsFiltered.push(charObj);
-    localStorage.setItem('chars', JSON.stringify(charsFiltered));
-    setChars(charsFiltered.chars);
-    alert('Character successfully created.');
+    const charsToLocalStorage = {
+      chars: charsFiltered
+    }
+    localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
+    setChars(charsToLocalStorage.chars);
+    setCharActive(charObj)
+    alert('Character successfully edited.');
     return;
   };
+
+  const deleteChar = (charId) => {
+    if(confirm("Do you really want to delete this character?")) {
+      const charsFromLocalStorage = localStorage.getItem('chars');
+      const charsParsed = JSON.parse(charsFromLocalStorage);
+      const charsFiltered = charsParsed.chars.filter(
+        (char) => char.id !== charId
+      );
+      if (charsFiltered.length === 0) {
+        setNoCharsFound(true)
+        localStorage.removeItem('chars')
+        setChars({})
+        setCharActive({})
+        alert("Character deleted!")
+        return Trash2Outline
+      }
+
+      const charsToLocalStorage = {
+        chars: charsFiltered
+      }
+
+      localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
+      setChars(charsToLocalStorage.chars);
+      setCharActive(charsToLocalStorage.chars[0])
+      alert("Character deleted!")
+      return true
+    }
+    return false
+  }
 
   const setActiveChar = (id) => {
     const charsFromLocalStorage = localStorage.getItem('chars');
@@ -76,12 +112,13 @@ const AppContext = ({ children }) => {
     });
 
     localStorage.setItem('chars', JSON.stringify(charsParsed));
-    setChars(charsParsed.chars)
+    setChars(charsParsed.chars);
 
     let charActive = chars.filter((char) => char.id === id);
     charActive[0].isActive = true;
-    console.log(charActive[0])
+    console.log(charActive[0]);
     setCharActive(charActive[0]);
+    setNoCharsFound(false);
     return;
   };
 
@@ -93,7 +130,8 @@ const AppContext = ({ children }) => {
         noCharsFound,
         createNewChar,
         editChar,
-        setActiveChar
+        setActiveChar,
+        deleteChar
       }}
     >
       {children}
