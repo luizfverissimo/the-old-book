@@ -24,7 +24,7 @@ const AppContext = ({ children }) => {
     console.log('Char Active:', charActiveFiltered[0]);
 
     setChars(charsParsed.chars);
-    setActiveChar(charActiveFiltered[0].id)
+    setCharActive(charActiveFiltered[0])
     setNoCharsFound(false);
   }, []);
 

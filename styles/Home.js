@@ -25,3 +25,13 @@ export const NoCharMessage = styled.h2`
   font-weight: bold;
   margin: 6rem 0;
 `
+
+export const NoSpellsMessage = styled.h2`
+  width: 100%;
+  text-align: center;
+  color: var(--light-purple);
+  font-family: 'Kanit', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 6rem 0;
+`

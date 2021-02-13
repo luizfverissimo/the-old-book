@@ -44,7 +44,9 @@ export default function Home() {
           }}
         />
         {noCharsFound ? (
-          <S.NoCharMessage>No Characters found, create a new Character.</S.NoCharMessage>
+          <S.NoCharMessage>
+            No Characters found, create a new Character.
+          </S.NoCharMessage>
         ) : (
           <CharTitle
             name={charActive.charInfos.name}
@@ -62,7 +64,7 @@ export default function Home() {
 
         {!noCharsFound && (
           <S.SpellCardGridWrapper>
-            <SpellCard
+            {/* <SpellCard
               name='Acid Arrow'
               level='2'
               school='Evocation'
@@ -73,57 +75,25 @@ export default function Home() {
               material="Powdered rhubarb leaf and an adder's stomach."
               desc='A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.'
               higherLevel='When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.'
-            />
-            <SpellCard
-              name='Acid Arrow'
-              level='2'
-              school='Evocation'
-              castingTime='1 action'
-              range='90 feet'
-              duration='Instantaneous'
-              components={['V', 'S', 'M']}
-              material="Powdered rhubarb leaf and an adder's stomach."
-            />
-            <SpellCard
-              name='Acid Arrow'
-              level='2'
-              school='Evocation'
-              castingTime='1 action'
-              range='90 feet'
-              duration='Instantaneous'
-              components={['V', 'S', 'M']}
-              material="Powdered rhubarb leaf and an adder's stomach."
-            />
-            <SpellCard
-              name='Acid Arrow'
-              level='2'
-              school='Evocation'
-              castingTime='1 action'
-              range='90 feet'
-              duration='Instantaneous'
-              components={['V', 'S', 'M']}
-              material="Powdered rhubarb leaf and an adder's stomach."
-            />
-            <SpellCard
-              name='Acid Arrow'
-              level='2'
-              school='Evocation'
-              castingTime='1 action'
-              range='90 feet'
-              duration='Instantaneous'
-              components={['V', 'S', 'M']}
-              material="Powdered rhubarb leaf and an adder's stomach."
-            />
-            <SpellCard
-              name='Acid Arrow'
-              level='2'
-              school='Evocation'
-              castingTime='1 action'
-              range='90 feet'
-              duration='Instantaneous'
-              components={['V', 'S', 'M']}
-              material="Powdered rhubarb leaf and an adder's stomach."
-            />
+            /> */}
+            {charActive.spells.length === 0 ? (
+              <S.NoSpellsMessage>No Spells, search and add to your SpellBook.</S.NoSpellsMessage>
+            ) : (
+              charActive.spells.map((spell) => {
+                <SpellCard
+                  name={spell.name}
+                  level={spell.level}
+                  school={spell.school}
+                  castingTime={spell.castingTime}
+                  range={spell.range}
+                  duration={spell.duration}
+                  components={spell.components}
+                  material={spell.material}
+                  desc={spell.desc}
+                  higherLevel={spell.higher_level}
+                />;
+              })
+            )}
           </S.SpellCardGridWrapper>
         )}
       </S.Content>
