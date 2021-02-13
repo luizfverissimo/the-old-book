@@ -1,12 +1,24 @@
 import React, { useState, useContext } from 'react';
 import useComponentVisible from '../../hooks/useComponentVisible';
+import Lottie from 'react-lottie';
 import * as S from './styled';
 
 import { CharContext } from '../../context/AppContext';
+import api from '../../utils/api';
+import loadingAnimation from '../../public/lottie/loading.json';
 
 function Navbar({ openCharModal }) {
-  const [isOpenChar, setIsOpenChar] = useState(false);
   const [isOpenSearchResults, setIsOpenSearchResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchSpellsResults, setSearchSpellsResults] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [timer, setTimer] = useState(null);
+
+  const loadingOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loadingAnimation
+  };
 
   const { chars, setActiveChar } = useContext(CharContext);
 
@@ -15,6 +27,28 @@ function Navbar({ openCharModal }) {
     isComponentVisible,
     setIsComponentVisible
   } = useComponentVisible(false);
+
+  const fetchSearchSpells = async (query) => {
+    setIsLoading(true);
+    const res = await api.get(`/api/spells/?name=${query}`);
+    const spellsResults = res.data.results;
+    setSearchSpellsResults(spellsResults);
+    setIsLoading(false);
+  };
+
+  const handleSpellSearch = (value) => {
+    setSearchText(value);
+    if (value.length >= 2) {
+      const searchQuery = value.replace(/ /g, '+');
+      clearTimeout(timer);
+      const actualTimer = setTimeout(() => {
+        fetchSearchSpells(searchQuery);
+      }, 2000);
+
+      setTimer(actualTimer);
+    }
+    return;
+  };
 
   return (
     <S.NavbarWrapper>
@@ -26,6 +60,8 @@ function Navbar({ openCharModal }) {
       <S.LeftElementsWrapper>
         <S.SearchInput
           placeholder='Search Spells'
+          value={searchText}
+          onChange={(e) => handleSpellSearch(e.target.value)}
           onFocus={() => {
             setIsOpenSearchResults(true);
             setIsComponentVisible(false);
@@ -34,8 +70,16 @@ function Navbar({ openCharModal }) {
         />
         {isOpenSearchResults && (
           <S.SearchResultWrapper>
-            <li>Fire Bolt</li>
-            <li>Fire Ball</li>
+            {isLoading && (
+              <Lottie options={loadingOptions} width={60} height={60} />
+            )}
+            {searchSpellsResults.map((spell) => {
+              return (
+                <li key={spell.index}>
+                  {spell.name}
+                </li>
+              );
+            })}
           </S.SearchResultWrapper>
         )}
 
