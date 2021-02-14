@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { Trash2Outline } from 'styled-icons/evaicons-outline';
-import { Letsencrypt } from 'styled-icons/simple-icons';
+import api from '../utils/api';
+
 
 const CharContext = createContext();
 
 const AppContext = ({ children }) => {
   const [chars, setChars] = useState({});
   const [charActive, setCharActive] = useState({});
+  const [spellDetails, setSpellDetails] = useState({});
   const [noCharsFound, setNoCharsFound] = useState(true);
 
   useEffect(() => {
@@ -122,6 +123,14 @@ const AppContext = ({ children }) => {
     return;
   };
 
+  const fetchSpellDetails = async (query) => {
+    const res = await api.get(query);
+    const spellDetailsRes = res.data;
+    console.log(spellDetailsRes)
+    setSpellDetails(spellDetailsRes)
+    return
+  }
+
   return (
     <CharContext.Provider
       value={{
@@ -131,7 +140,9 @@ const AppContext = ({ children }) => {
         createNewChar,
         editChar,
         setActiveChar,
-        deleteChar
+        deleteChar,
+        fetchSpellDetails,
+        spellDetails
       }}
     >
       {children}

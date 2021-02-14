@@ -16,14 +16,7 @@ export default function Home() {
   const [isOpenModalSpellDetails, setIsOpenModalSpellDetails] = useState(false);
   const [isEditChar, setIsEditChar] = useState(false);
 
-  const { chars, charActive, noCharsFound } = useContext(CharContext);
-
-  const charInfos = {
-    name: 'Rydel Theharcie',
-    charClass: 'Sorcerer',
-    race: 'Elf',
-    level: '02'
-  };
+  const { chars, charActive, noCharsFound, spellDetails } = useContext(CharContext);
 
   return (
     <>
@@ -41,16 +34,7 @@ export default function Home() {
 
       {isOpenModalSpellDetails && (
         <ModalSpellDetails
-          name='Acid Arrow'
-          level='2'
-          school='Evocation'
-          castingTime='1 action'
-          range='90 feet'
-          duration='Instantaneous'
-          components={['V', 'S', 'M']}
-          material="Powdered rhubarb leaf and an adder's stomach."
-          desc='A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.'
-          higherLevel='When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.'
+          spellDetails={spellDetails}
           closeModal={() => setIsOpenModalSpellDetails(false)}
         />
       )}

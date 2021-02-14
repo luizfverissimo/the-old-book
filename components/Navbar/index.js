@@ -20,7 +20,7 @@ function Navbar({ openCharModal, openSpellDetails }) {
     animationData: loadingAnimation
   };
 
-  const { chars, setActiveChar } = useContext(CharContext);
+  const { chars, setActiveChar, fetchSpellDetails } = useContext(CharContext);
 
   const {
     ref,
@@ -43,7 +43,7 @@ function Navbar({ openCharModal, openSpellDetails }) {
       clearTimeout(timer);
       const actualTimer = setTimeout(() => {
         fetchSearchSpells(searchQuery);
-      }, 2000);
+      }, 1000);
 
       setTimer(actualTimer);
     }
@@ -51,9 +51,7 @@ function Navbar({ openCharModal, openSpellDetails }) {
   };
 
   const handleSpellDetails = async (query) => {
-    const res = await api.get(query);
-    const spellDetails = res.data;
-    console.log(spellDetails);
+    await fetchSpellDetails(query)
     openSpellDetails();
   };
 
