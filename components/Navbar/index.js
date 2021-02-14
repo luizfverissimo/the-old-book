@@ -7,7 +7,7 @@ import { CharContext } from '../../context/AppContext';
 import api from '../../utils/api';
 import loadingAnimation from '../../public/lottie/loading.json';
 
-function Navbar({ openCharModal }) {
+function Navbar({ openCharModal, openSpellDetails }) {
   const [isOpenSearchResults, setIsOpenSearchResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchSpellsResults, setSearchSpellsResults] = useState([]);
@@ -50,6 +50,13 @@ function Navbar({ openCharModal }) {
     return;
   };
 
+  const handleSpellDetails = async (query) => {
+    const res = await api.get(query);
+    const spellDetails = res.data;
+    console.log(spellDetails);
+    openSpellDetails();
+  };
+
   return (
     <S.NavbarWrapper>
       <S.LogoWrapper>
@@ -66,7 +73,7 @@ function Navbar({ openCharModal }) {
             setIsOpenSearchResults(true);
             setIsComponentVisible(false);
           }}
-          onBlur={() => setIsOpenSearchResults(false)}
+          //onBlur={() => setIsOpenSearchResults(false)}
         />
         {isOpenSearchResults && (
           <S.SearchResultWrapper>
@@ -75,7 +82,10 @@ function Navbar({ openCharModal }) {
             )}
             {searchSpellsResults.map((spell) => {
               return (
-                <li key={spell.index}>
+                <li
+                  key={spell.index}
+                  onClick={() => handleSpellDetails(spell.url)}
+                >
                   {spell.name}
                 </li>
               );

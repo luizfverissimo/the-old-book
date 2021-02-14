@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Close } from 'styled-icons/evaicons-solid';
-import { Construction } from 'styled-icons/material-twotone';
 
 export const ModalBackground = styled.div`
   width: 100vw;

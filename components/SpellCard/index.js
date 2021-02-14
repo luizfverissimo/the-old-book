@@ -16,12 +16,12 @@ function SpellCard({
   ritual,
   duration,
   level,
-  school
+  school,
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
-
   return (
     <S.SpellCardWrapper>
+      {children}
       <S.SpellCardHeader>
         <S.SpellCardTitleWrapper expanded={isExpanded}>
           <S.SpellCardTitle>{name}</S.SpellCardTitle>
@@ -49,9 +49,11 @@ function SpellCard({
         </p>
         <p>
           <strong>Components:</strong>{' '}
-          {components.map((item) => (
-            <span>{item}, </span>
-          ))}{' '}
+          {!components ? (
+            <span>No components</span>
+          ) : (
+            components.map((item, index) => <span key={index}>{item}, </span>)
+          )}{' '}
           ({material})
         </p>
       </S.SpellCardStatsWrapper>
