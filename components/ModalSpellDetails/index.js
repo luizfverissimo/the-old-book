@@ -30,6 +30,23 @@ function ModalSpellDetails({ spellDetails, closeModal }) {
               <p>
                 <strong>Duration:</strong> {spellDetails.duration}
               </p>
+              {spellDetails.concentration && (
+                <p>
+                  <strong>Concentration.</strong>
+                </p>
+              )}
+              {spellDetails.ritual && (
+                <p>
+                  <strong>Ritual.</strong>
+                </p>
+              )}
+              {spellDetails.area_of_effect && (
+                <p>
+                  <strong>Area of effect:</strong>{' '}
+                  {spellDetails.area_of_effect.type} -{' '}
+                  {spellDetails.area_of_effect.size}
+                </p>
+              )}
               <p>
                 <strong>Components:</strong>{' '}
                 {!spellDetails.components ? (
@@ -39,16 +56,22 @@ function ModalSpellDetails({ spellDetails, closeModal }) {
                     <span key={index}>{item}, </span>
                   ))
                 )}{' '}
-                ({spellDetails.material})
+                {spellDetails.material ? `(${spellDetails.material})` : null}
               </p>
             </S.SpellCardStatsWrapper>
             <S.SpellCardDesc>
-              <p>{spellDetails.desc[0]}</p>
+              {spellDetails.desc.map((spell, index) => (
+                <p key={index}>{spell}</p>
+              ))}
               {spellDetails.higher_level && (
-                <p>
-                  <strong>At Higher Levels:</strong>{' '}
-                  {spellDetails.higher_level[0]}
-                </p>
+                <>
+                  <p>
+                    <strong>At Higher Levels:</strong>
+                  </p>
+                  {spellDetails.higher_level.map((spell, index) => (
+                    <p key={index}>{spell}</p>
+                  ))}
+                </>
               )}
             </S.SpellCardDesc>
           </>

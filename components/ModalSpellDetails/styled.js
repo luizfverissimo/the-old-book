@@ -117,11 +117,11 @@ export const SpellCardDesc = styled.div`
   margin-top: 1rem;
 
   p{
-    margin: 0;
+    margin-bottom: 0.5rem;
 
-    &:first-child {
+    /* &:first-child {
       margin-bottom: 1rem;
-    }
+    } */
 
     strong {
       font-weight: 600;
