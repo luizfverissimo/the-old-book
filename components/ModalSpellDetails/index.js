@@ -19,7 +19,10 @@ function ModalSpellDetails({ spellDetails, closeModal }) {
               <S.SpellCardTitleWrapper>
                 <S.SpellCardTitle>{spellDetails.name}</S.SpellCardTitle>
                 <S.SpellCardInfo>
-                  {spellDetails.level}-level {spellDetails.school.name}
+                  {spellDetails.level === 0
+                    ? 'Cantrip'
+                    : `${spellDetails.level}-level`}{' '}
+                  {spellDetails.school.name}
                 </S.SpellCardInfo>
               </S.SpellCardTitleWrapper>
             </S.SpellCardHeader>
@@ -82,7 +85,9 @@ function ModalSpellDetails({ spellDetails, closeModal }) {
         )}
 
         <S.SpellCardInteractionWrapper>
-          <a onClick={() => addSpell(spellDetails, charActive.id)}>Add to SpellBook</a>
+          <a onClick={() => addSpell(spellDetails, charActive.id)}>
+            Add to SpellBook
+          </a>
         </S.SpellCardInteractionWrapper>
       </S.SpellCardWrapper>
     </S.ModalBackground>

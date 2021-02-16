@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import useComponentVisible from '../../hooks/useComponentVisible';
 import filtersJSONData from '../../data/filters.json';
 
 import * as S from './styled';
+import { CharContext } from '../../context/AppContext';
 
 function Filter() {
-  const [filterSelected, setFilterSelected] = useState('All');
-
   const { filters } = filtersJSONData;
+
+  const { filterSelected, setFilterSelected } = useContext(CharContext);
 
   const {
     ref,
@@ -17,7 +18,7 @@ function Filter() {
 
   return (
     <S.FilterWrapper>
-      <p>{filterSelected}</p>
+      <p>{filterSelected.name}</p>
       <S.FilterIconWrapper
         active={isComponentVisible}
         onClick={() => setIsComponentVisible(!isComponentVisible)}
@@ -34,7 +35,7 @@ function Filter() {
                 setFilterSelected(filter);
               }}
             >
-              {filter}
+              {filter.name}
             </li>
           ))}
         </S.FilterItemsWrapper>

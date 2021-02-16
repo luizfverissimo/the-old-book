@@ -16,9 +16,13 @@ export default function Home() {
   const [isOpenModalSpellDetails, setIsOpenModalSpellDetails] = useState(false);
   const [isEditChar, setIsEditChar] = useState(false);
 
-  const { chars, charActive, noCharsFound, spellDetails } = useContext(
-    CharContext
-  );
+  const {
+    chars,
+    charActive,
+    filterSelected,
+    noCharsFound,
+    spellDetails
+  } = useContext(CharContext);
 
   return (
     <>
@@ -70,45 +74,69 @@ export default function Home() {
 
         {!noCharsFound && (
           <S.SpellCardGridWrapper>
-            {/* <SpellCard
-              name='Acid Arrow'
-              level='2'
-              school='Evocation'
-              castingTime='1 action'
-              range='90 feet'
-              duration='Instantaneous'
-              components={['V', 'S', 'M']}
-              material="Powdered rhubarb leaf and an adder's stomach."
-              desc={['A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.']}
-              higherLevel={['When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.']}
-            /> */}
             {charActive.spells.length === 0 ? (
               <S.NoSpellsMessage>
                 No Spells, search and add to your SpellBook.
               </S.NoSpellsMessage>
             ) : (
-              charActive.spells.map((spell, index) => (
-                <SpellCard
-                  key={index}
-                  index={spell.index}
-                  name={spell.name}
-                  desc={spell.desc}
-                  higherLevel={spell.higher_level}
-                  range={spell.range}
-                  components={spell.components}
-                  material={spell.material}
-                  castingTime={spell.casting_time}
-                  concentration={spell.concentration}
-                  ritual={spell.ritual}
-                  duration={spell.duration}
-                  level={spell.level}
-                  school={spell.school}
-                  aoe={spell.area_of_effect}
-                />
-              ))
+              charActive.spells.map((spell, index) => {
+                if (filterSelected.value === null) {
+                  console.log(spell.level);
+                  return (
+                    <SpellCard
+                      key={index}
+                      index={spell.index}
+                      name={spell.name}
+                      desc={spell.desc}
+                      higherLevel={spell.higher_level}
+                      range={spell.range}
+                      components={spell.components}
+                      material={spell.material}
+                      castingTime={spell.casting_time}
+                      concentration={spell.concentration}
+                      ritual={spell.ritual}
+                      duration={spell.duration}
+                      level={spell.level}
+                      school={spell.school}
+                      aoe={spell.area_of_effect}
+                    />
+                  );
+                }
+                if (spell.level === filterSelected.value) {
+                  console.log(spell.level);
+                  return (
+                    <SpellCard
+                      key={index}
+                      index={spell.index}
+                      name={spell.name}
+                      desc={spell.desc}
+                      higherLevel={spell.higher_level}
+                      range={spell.range}
+                      components={spell.components}
+                      material={spell.material}
+                      castingTime={spell.casting_time}
+                      concentration={spell.concentration}
+                      ritual={spell.ritual}
+                      duration={spell.duration}
+                      level={spell.level}
+                      school={spell.school}
+                      aoe={spell.area_of_effect}
+                    />
+                  );
+                }
+              })
             )}
           </S.SpellCardGridWrapper>
         )}
+        <S.FooterWrapper>
+          <p>
+            Data provided by{' '}
+            <a href='http://www.dnd5eapi.co' rel='noreferrer' target='_blank'>
+              D&D 5e API
+            </a>
+            .
+          </p>
+        </S.FooterWrapper>
       </S.Content>
     </>
   );

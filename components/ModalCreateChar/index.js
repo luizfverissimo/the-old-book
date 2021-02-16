@@ -99,6 +99,8 @@ function ModalCreateChar({ closeModal, charInfos, charId, isEditChar }) {
         <S.ModalCardFormInput
           type='phone'
           maxLength={2}
+          min={1}
+          max={99}
           value={level}
           onChange={(e) => setLevel(e.target.value)}
         />

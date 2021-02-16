@@ -1,15 +1,15 @@
 {
   "filters": [
-    "All",
-    "Cantrip",
-    "1st-level",
-    "2nd-level",
-    "3rd-level",
-    "4th-level",
-    "5th-level",
-    "6th-level",
-    "7th-level",
-    "8th-level",
-    "9th-level"
+    {"name": "All", "value": null},
+    {"name": "Cantrip", "value": 0},
+    {"name": "1st-level", "value": 1},
+    {"name": "2nd-level", "value": 2},
+    {"name": "3rd-level", "value": 3},
+    {"name": "4th-level", "value": 4},
+    {"name": "5th-level", "value": 5},
+    {"name": "6th-level", "value": 6},
+    {"name": "7th-level", "value": 7},
+    {"name": "8th-level", "value": 8},
+    {"name": "9th-level", "value": 9}
   ]
 }

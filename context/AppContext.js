@@ -8,6 +8,10 @@ const AppContext = ({ children }) => {
   const [charActive, setCharActive] = useState({});
   const [spellDetails, setSpellDetails] = useState({});
   const [noCharsFound, setNoCharsFound] = useState(true);
+  const [filterSelected, setFilterSelected] = useState({
+    name: 'All',
+    value: null
+  });
 
   useEffect(() => {
     const charsFromLocalStorage = localStorage.getItem('chars');
@@ -129,6 +133,11 @@ const AppContext = ({ children }) => {
   };
 
   const addSpell = (spell, charId) => {
+    if (Object.keys(charActive).length === 0) {
+      alert('Create a char to start add spells.');
+      return;
+    }
+
     const charsFromLocalStorage = localStorage.getItem('chars');
     const charsParsed = JSON.parse(charsFromLocalStorage);
 
@@ -156,8 +165,10 @@ const AppContext = ({ children }) => {
 
       let charEdited = charsParsed.chars.filter((char) => char.id === charId);
 
-      const spellFiltered = charEdited[0].spells.filter(spell => spell.index !== spellIndex );
-      charEdited[0].spells = spellFiltered
+      const spellFiltered = charEdited[0].spells.filter(
+        (spell) => spell.index !== spellIndex
+      );
+      charEdited[0].spells = spellFiltered;
 
       let charsFiltered = charsParsed.chars.filter(
         (char) => char.id !== charId
@@ -183,6 +194,8 @@ const AppContext = ({ children }) => {
         charActive,
         noCharsFound,
         spellDetails,
+        filterSelected,
+        setFilterSelected,
         createNewChar,
         editChar,
         setActiveChar,

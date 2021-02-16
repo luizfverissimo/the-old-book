@@ -28,7 +28,7 @@ function SpellCard({
         <S.SpellCardTitleWrapper expanded={isExpanded}>
           <S.SpellCardTitle>{name}</S.SpellCardTitle>
           <S.SpellCardInfo>
-            {level}-level {school.name}
+            {level === 0 ? 'Cantrip' : `${level}-level`} {school.name}
           </S.SpellCardInfo>
         </S.SpellCardTitleWrapper>
         <S.ArrowDownIcon
