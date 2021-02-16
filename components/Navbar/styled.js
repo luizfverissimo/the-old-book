@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { User } from 'styled-icons/boxicons-solid';
-import { GearFill } from 'styled-icons/bootstrap'
+import { GearFill } from 'styled-icons/bootstrap';
 
 export const NavbarWrapper = styled.nav`
   width: 100%;
@@ -17,6 +17,16 @@ export const LogoWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   line-height: 2rem;
+`;
+
+export const ApiMessage = styled.p`
+  color: var(--light-purple);
+  font-family: 'Kanit', sans-serif;
+  font-size: 1rem;
+
+  a {
+    text-decoration: underline;
+  }
 `;
 
 export const LogoTitle = styled.h1`
@@ -36,7 +46,7 @@ export const LeftElementsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const IconsWrapper = styled.div`
   display: flex;
@@ -81,7 +91,7 @@ export const CharWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 export const CharItem = styled.li`
   width: 100%;
   display: flex;
@@ -97,7 +107,7 @@ export const CharItem = styled.li`
   &:last-child {
     margin-bottom: 0;
   }
-`
+`;
 export const CharItemName = styled.p`
   margin: 0;
   transition: all 0.2s ease;
@@ -105,7 +115,7 @@ export const CharItemName = styled.p`
   ${CharItem}:hover & {
     color: var(--yellow);
   }
-`
+`;
 export const CharItemClass = styled.p`
   font-size: 1rem;
   margin: 0;
@@ -114,7 +124,7 @@ export const CharItemClass = styled.p`
   ${CharItem}:hover & {
     color: var(--light-yellow);
   }
-`
+`;
 
 export const CharActionWrapper = styled.li`
   width: 100%;
@@ -131,5 +141,4 @@ export const CharActionWrapper = styled.li`
       color: var(--yellow);
     }
   }
-`
-
+`;

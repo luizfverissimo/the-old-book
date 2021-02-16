@@ -64,7 +64,7 @@ export default function Home() {
             race={charActive.charInfos.race}
             level={charActive.charInfos.level}
             openCharModal={() => {
-              setIsOpenModal(true);
+              setIsOpenModalCreateChar(true);
               setIsEditChar(true);
             }}
           />
@@ -128,15 +128,6 @@ export default function Home() {
             )}
           </S.SpellCardGridWrapper>
         )}
-        <S.FooterWrapper>
-          <p>
-            Data provided by{' '}
-            <a href='http://www.dnd5eapi.co' rel='noreferrer' target='_blank'>
-              D&D 5e API
-            </a>
-            .
-          </p>
-        </S.FooterWrapper>
       </S.Content>
     </>
   );

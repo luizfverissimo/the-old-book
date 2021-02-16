@@ -41,6 +41,27 @@ li {
   list-style: none;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--purple); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--light-purple);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--black); 
+}
+
 `;
 
 export default GlobalStyle;

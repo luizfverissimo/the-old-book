@@ -113,8 +113,11 @@ export const SpellCardDesc = styled.div`
   font-size: 1.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 1rem;
+  overflow-y: auto;
+  height: 500px;
+  
 
   p{
     margin-bottom: 0.5rem;

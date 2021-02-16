@@ -21,6 +21,13 @@ function Navbar({ openCharModal, openSpellDetails }) {
       <S.LogoWrapper>
         <S.LogoTitle>The Old Book</S.LogoTitle>
         <S.LogoSubTitle>SpellBook Manager</S.LogoSubTitle>
+        <S.ApiMessage>
+            Data provided by{' '}
+            <a href='http://www.dnd5eapi.co' rel='noreferrer' target='_blank'>
+              D&D 5e API
+            </a>
+            .
+          </S.ApiMessage>
       </S.LogoWrapper>
 
       <S.LeftElementsWrapper>
