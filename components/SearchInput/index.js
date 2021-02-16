@@ -47,6 +47,23 @@ function SearchInput({openSpellDetails}) {
 
       setTimer(actualTimer);
     }
+
+    if(value < 2) {
+      clearTimeout(timer);
+      setSearchSpellsResults([])
+      return
+    }
+
+    return;
+  };
+
+  const handleSearchSpellsEnter = (e, value) => {
+    const searchQuery = value.replace(/ /g, '+');
+    if (e.keyCode === 13) {
+      clearTimeout(timer);
+      fetchSearchSpells(searchQuery);
+      return;
+    }
     return;
   };
 
@@ -61,6 +78,7 @@ function SearchInput({openSpellDetails}) {
         placeholder='Search Spells'
         value={searchText}
         onChange={(e) => handleSpellSearch(e.target.value)}
+        onKeyUp={(e) => handleSearchSpellsEnter(e, e.target.value)}
         onClick={() => {
           setIsComponentVisible(true);
         }}
@@ -70,6 +88,7 @@ function SearchInput({openSpellDetails}) {
           {isLoading && (
             <Lottie options={loadingOptions} width={60} height={60} />
           )}
+          {searchSpellsResults.length === 0 && <li>No spells found.</li>}
           {searchSpellsResults.map((spell) => {
             return (
               <li

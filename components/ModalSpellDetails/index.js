@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { CharContext } from '../../context/AppContext';
 
 import * as S from './styled';
 
 function ModalSpellDetails({ spellDetails, closeModal }) {
+  const { addSpell, charActive } = useContext(CharContext);
+
   return (
     <S.ModalBackground>
       <S.SpellCardWrapper>
@@ -78,7 +82,7 @@ function ModalSpellDetails({ spellDetails, closeModal }) {
         )}
 
         <S.SpellCardInteractionWrapper>
-          <a>Add to SpellBook</a>
+          <a onClick={() => addSpell(spellDetails, charActive.id)}>Add to SpellBook</a>
         </S.SpellCardInteractionWrapper>
       </S.SpellCardWrapper>
     </S.ModalBackground>

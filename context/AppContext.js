@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import api from '../utils/api';
 
-
 const CharContext = createContext();
 
 const AppContext = ({ children }) => {
@@ -25,7 +24,7 @@ const AppContext = ({ children }) => {
     console.log('Char Active:', charActiveFiltered[0]);
 
     setChars(charsParsed.chars);
-    setCharActive(charActiveFiltered[0])
+    setCharActive(charActiveFiltered[0]);
     setNoCharsFound(false);
   }, []);
 
@@ -55,49 +54,47 @@ const AppContext = ({ children }) => {
     const charsFromLocalStorage = localStorage.getItem('chars');
     const charsParsed = JSON.parse(charsFromLocalStorage);
 
-    let charsFiltered = charsParsed.chars.filter(
-      (char) => char.id !== charId
-    );
+    let charsFiltered = charsParsed.chars.filter((char) => char.id !== charId);
 
     charsFiltered.push(charObj);
     const charsToLocalStorage = {
       chars: charsFiltered
-    }
+    };
     localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
     setChars(charsToLocalStorage.chars);
-    setCharActive(charObj)
+    setCharActive(charObj);
     alert('Character successfully edited.');
     return;
   };
 
   const deleteChar = (charId) => {
-    if(confirm("Do you really want to delete this character?")) {
+    if (confirm('Do you really want to delete this character?')) {
       const charsFromLocalStorage = localStorage.getItem('chars');
       const charsParsed = JSON.parse(charsFromLocalStorage);
       const charsFiltered = charsParsed.chars.filter(
         (char) => char.id !== charId
       );
       if (charsFiltered.length === 0) {
-        setNoCharsFound(true)
-        localStorage.removeItem('chars')
-        setChars({})
-        setCharActive({})
-        alert("Character deleted!")
-        return Trash2Outline
+        setNoCharsFound(true);
+        localStorage.removeItem('chars');
+        setChars({});
+        setCharActive({});
+        alert('Character deleted!');
+        return Trash2Outline;
       }
 
       const charsToLocalStorage = {
         chars: charsFiltered
-      }
+      };
 
       localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
       setChars(charsToLocalStorage.chars);
-      setCharActive(charsToLocalStorage.chars[0])
-      alert("Character deleted!")
-      return true
+      setCharActive(charsToLocalStorage.chars[0]);
+      alert('Character deleted!');
+      return true;
     }
-    return false
-  }
+    return false;
+  };
 
   const setActiveChar = (id) => {
     const charsFromLocalStorage = localStorage.getItem('chars');
@@ -126,10 +123,58 @@ const AppContext = ({ children }) => {
   const fetchSpellDetails = async (query) => {
     const res = await api.get(query);
     const spellDetailsRes = res.data;
-    console.log(spellDetailsRes)
-    setSpellDetails(spellDetailsRes)
-    return
-  }
+    console.log(spellDetailsRes);
+    setSpellDetails(spellDetailsRes);
+    return;
+  };
+
+  const addSpell = (spell, charId) => {
+    const charsFromLocalStorage = localStorage.getItem('chars');
+    const charsParsed = JSON.parse(charsFromLocalStorage);
+
+    let charEdited = charsParsed.chars.filter((char) => char.id === charId);
+
+    charEdited[0].spells.push(spell);
+
+    let charsFiltered = charsParsed.chars.filter((char) => char.id !== charId);
+
+    charsFiltered.push(charEdited[0]);
+    const charsToLocalStorage = {
+      chars: charsFiltered
+    };
+    localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
+    setChars(charsToLocalStorage.chars);
+    setCharActive(charEdited[0]);
+    alert('Spells added to your SpellBook.');
+    return;
+  };
+
+  const removeSpell = (spellIndex, charId) => {
+    if (confirm('Do you really want to remove this spell?')) {
+      const charsFromLocalStorage = localStorage.getItem('chars');
+      const charsParsed = JSON.parse(charsFromLocalStorage);
+
+      let charEdited = charsParsed.chars.filter((char) => char.id === charId);
+
+      const spellFiltered = charEdited[0].spells.filter(spell => spell.index !== spellIndex );
+      charEdited[0].spells = spellFiltered
+
+      let charsFiltered = charsParsed.chars.filter(
+        (char) => char.id !== charId
+      );
+
+      charsFiltered.push(charEdited[0]);
+      const charsToLocalStorage = {
+        chars: charsFiltered
+      };
+      localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
+      setChars(charsToLocalStorage.chars);
+      setCharActive(charEdited[0]);
+      alert('The Spell was removed from your SpellBook.');
+      return;
+    }
+    return;
+  };
 
   return (
     <CharContext.Provider
@@ -137,12 +182,14 @@ const AppContext = ({ children }) => {
         chars,
         charActive,
         noCharsFound,
+        spellDetails,
         createNewChar,
         editChar,
         setActiveChar,
         deleteChar,
         fetchSpellDetails,
-        spellDetails
+        addSpell,
+        removeSpell
       }}
     >
       {children}
