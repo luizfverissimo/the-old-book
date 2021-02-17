@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import media from 'styled-media-query'
 
 export const Content = styled.main`
   width: 100vw;
@@ -10,11 +11,18 @@ export const SpellCardGridWrapper = styled.section`
   width: 100%;
   height: auto;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding-bottom: 3rem;
   /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem; */
+
+  ${media.lessThan('large')`
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+  `}
 `
 
 export const NoCharMessage = styled.h2`

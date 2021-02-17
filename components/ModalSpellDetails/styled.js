@@ -116,7 +116,7 @@ export const SpellCardDesc = styled.div`
   justify-content: flex-start;
   margin-top: 1rem;
   overflow-y: auto;
-  height: 500px;
+  max-height: 500px;
   
 
   p{

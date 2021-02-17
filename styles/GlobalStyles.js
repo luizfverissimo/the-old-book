@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import media from 'styled-media-query'
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -16,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${media.lessThan('large')`
+    font-size: 10px;
+  `}
 }
 
 body {

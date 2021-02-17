@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query'
 import { User } from 'styled-icons/boxicons-solid';
 import { GearFill } from 'styled-icons/bootstrap';
 
@@ -91,6 +92,11 @@ export const CharWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${media.lessThan('large')`
+    top: 13vh;
+    right: 9vw;
+  `}
 `;
 export const CharItem = styled.li`
   width: 100%;

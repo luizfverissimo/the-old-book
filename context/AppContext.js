@@ -58,15 +58,21 @@ const AppContext = ({ children }) => {
     const charsFromLocalStorage = localStorage.getItem('chars');
     const charsParsed = JSON.parse(charsFromLocalStorage);
 
+    const charEdited = charsParsed.chars.filter((char) => char.id === charId);
+
+    let charWithSpells = charObj
+    charWithSpells.spells = charEdited[0].spells
+    console.log(charWithSpells)
+
     let charsFiltered = charsParsed.chars.filter((char) => char.id !== charId);
 
-    charsFiltered.push(charObj);
+    charsFiltered.push(charWithSpells);
     const charsToLocalStorage = {
       chars: charsFiltered
     };
     localStorage.setItem('chars', JSON.stringify(charsToLocalStorage));
     setChars(charsToLocalStorage.chars);
-    setCharActive(charObj);
+    setCharActive(charWithSpells);
     alert('Character successfully edited.');
     return;
   };

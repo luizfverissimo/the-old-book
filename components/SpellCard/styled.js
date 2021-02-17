@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import media from 'styled-media-query'
 import { DownArrow, UpArrow } from "styled-icons/boxicons-solid"
 
 export const SpellCardWrapper = styled.div`
@@ -20,6 +21,11 @@ export const SpellCardWrapper = styled.div`
   &:last-child {
     margin-right: 0;
   }
+
+  ${media.lessThan('large')`
+    margin: 1rem 0;
+    max-width: 85vw;
+  `}
 `
 
 export const SpellCardHeader = styled.div`
@@ -88,15 +94,13 @@ export const SpellCardDesc = styled.div`
   font-size: 1.2rem;
   display: ${props => props.expanded ? "flex" : "none"};
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 1rem;
+  overflow-y: auto;
+  max-height: 500px;
 
   p{
-    margin: 0;
-
-    &:first-child {
-      margin-bottom: 1rem;
-    }
+    margin-bottom: 1rem;
 
     strong {
       font-weight: 600;

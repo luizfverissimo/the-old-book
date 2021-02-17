@@ -40,7 +40,7 @@ function ModalCreateChar({ closeModal, charInfos, charId, isEditChar }) {
 
     const charObj = {
       id: isEditChar ? id : uniqid(),
-      isActive: false,
+      isActive: isEditChar ? true : false,
       charInfos: {
         name,
         race,
