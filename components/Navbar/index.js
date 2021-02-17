@@ -4,10 +4,9 @@ import useComponentVisible from '../../hooks/useComponentVisible';
 import * as S from './styled';
 
 import { CharContext } from '../../context/AppContext';
-import SearchInput from '../SearchInput'
+import SearchInput from '../SearchInput';
 
 function Navbar({ openCharModal, openSpellDetails }) {
-
   const { chars, setActiveChar } = useContext(CharContext);
 
   const {
@@ -19,19 +18,21 @@ function Navbar({ openCharModal, openSpellDetails }) {
   return (
     <S.NavbarWrapper>
       <S.LogoWrapper>
-        <S.LogoTitle>The Old Book</S.LogoTitle>
-        <S.LogoSubTitle>SpellBook Manager</S.LogoSubTitle>
+        <S.Logo>
+          <S.LogoTitle>The Old Book</S.LogoTitle>
+          <S.LogoSubTitle>SpellBook Manager</S.LogoSubTitle>
+        </S.Logo>
         <S.ApiMessage>
-            Data provided by{' '}
-            <a href='http://www.dnd5eapi.co' rel='noreferrer' target='_blank'>
-              D&D 5e API
-            </a>
-            .
-          </S.ApiMessage>
+          Data provided by{' '}
+          <a href='http://www.dnd5eapi.co' rel='noreferrer' target='_blank'>
+            D&D 5e API
+          </a>
+          .
+        </S.ApiMessage>
       </S.LogoWrapper>
 
       <S.LeftElementsWrapper>
-        <SearchInput openSpellDetails={openSpellDetails}/>
+        <SearchInput openSpellDetails={openSpellDetails} />
         <S.IconsWrapper>
           <S.CharIcon
             active={isComponentVisible}

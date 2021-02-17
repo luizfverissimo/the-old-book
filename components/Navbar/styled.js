@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import media from 'styled-media-query'
+import media from 'styled-media-query';
 import { User } from 'styled-icons/boxicons-solid';
 import { GearFill } from 'styled-icons/bootstrap';
 
@@ -11,6 +11,10 @@ export const NavbarWrapper = styled.nav`
   justify-content: space-between;
   padding: 1.5rem 0;
   position: relative;
+
+  ${media.lessThan('large')`
+    flex-direction: column;
+  `}
 `;
 
 export const LogoWrapper = styled.div`
@@ -18,6 +22,19 @@ export const LogoWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   line-height: 2rem;
+
+  ${media.lessThan('large')`
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 2rem;
+    `}
+`;
+
+export const Logo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const ApiMessage = styled.p`
@@ -94,8 +111,8 @@ export const CharWrapper = styled.ul`
   align-items: center;
 
   ${media.lessThan('large')`
-    top: 13vh;
-    right: 9vw;
+    top: 14vh;
+    right: 20vw;
   `}
 `;
 export const CharItem = styled.li`

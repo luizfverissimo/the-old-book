@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import media from 'styled-media-query';
 
 export const SearchInput = styled.input`
   width: 20rem;
@@ -42,6 +43,11 @@ export const SearchResultWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  ${media.lessThan('large')`
+    top: 14vh;
+    left: 14vw;
+  `}
 
   li {
     cursor: pointer;
