@@ -64,6 +64,11 @@ export const LeftElementsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${media.lessThan('large')`
+    justify-content: space-around;
+    width: 100%;
+  `}
 `;
 
 export const IconsWrapper = styled.div`
@@ -112,7 +117,7 @@ export const CharWrapper = styled.ul`
 
   ${media.lessThan('large')`
     top: 12rem;
-    right: 9rem;
+    right: 2rem;
   `}
 `;
 export const CharItem = styled.li`

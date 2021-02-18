@@ -46,7 +46,7 @@ export const SearchResultWrapper = styled.ul`
 
   ${media.lessThan('large')`
     top: 12rem;
-    left: 6rem;
+    left: 2rem;
   `}
 
   li {
