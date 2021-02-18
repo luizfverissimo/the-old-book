@@ -45,8 +45,8 @@ export const SearchResultWrapper = styled.ul`
   align-items: flex-start;
 
   ${media.lessThan('large')`
-    top: 14vh;
-    left: 14vw;
+    top: 12rem;
+    left: 6rem;
   `}
 
   li {

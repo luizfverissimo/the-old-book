@@ -111,8 +111,8 @@ export const CharWrapper = styled.ul`
   align-items: center;
 
   ${media.lessThan('large')`
-    top: 14vh;
-    right: 20vw;
+    top: 12rem;
+    right: 9rem;
   `}
 `;
 export const CharItem = styled.li`
