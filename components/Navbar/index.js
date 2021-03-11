@@ -64,7 +64,6 @@ function Navbar({ openCharModal, openSpellDetails }) {
               </S.CharActionWrapper>
             </S.CharWrapper>
           )}
-          <S.GearIcon size={28} />
         </S.IconsWrapper>
       </S.LeftElementsWrapper>
     </S.NavbarWrapper>
